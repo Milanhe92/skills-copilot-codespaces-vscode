@@ -1,4 +1,30 @@
-<header>
+<headerimport requests
+
+# Vaš API ključ
+api_key = "VAŠ_API_KLJUČ"
+
+# Endpoint API-ja
+url = "https://api.example.com/data"
+
+# Zaglavlje sa API ključem
+headers = {
+    "Authorization": f"Bearer {api_key}"
+}
+
+# Parametri (ako ih imate)
+params = {
+    "param1": "vrednost1",
+    "param2": "vrednost2"
+}
+
+# Slanje GET zahteva API-ju
+response = requests.get(url, headers=headers, params=params)
+
+if response.status_code == 200:
+    print("Uspeh!", response.json())
+else:
+    print("Greška:", response.status_code, response.text)
+Here's >
 
 <!--
   <<< Author notes: Course header >>>
