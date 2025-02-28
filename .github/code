@@ -1,0 +1,93 @@
+# Removing Properties from JavaScript Objects
+
+Removing properties from JavaScript objects can be done in several ways. Each method has its implications in terms of performance, immutability, and behavior. Below are some common methods:
+
+## Method 1: Using the `delete` Operator
+
+The `delete` operator is the most common way to remove properties from an object.
+
+### Example
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+delete obj.b;
+console.log(obj); // { a: 1, c: 3 }
+```
+
+### Implications
+- **Performance**: The `delete` operator can be slow because it modifies the object's structure.
+- **Behavior**: It removes the property from the object, and the property will no longer exist.
+
+## Method 2: Using Destructuring Assignment
+
+Destructuring assignment can be used to create a new object without the specified property.
+
+### Example
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+let { b, ...newObj } = obj;
+console.log(newObj); // { a: 1, c: 3 }
+```
+
+### Implications
+- **Performance**: It creates a new object, which can be more performant for large objects.
+- **Behavior**: The original object remains unchanged, promoting immutability.
+
+## Method 3: Using Object Spread Operator
+
+The spread operator can be used to create a new object while excluding specific properties.
+
+### Example
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+let newObj = { ...obj };
+delete newObj.b;
+console.log(newObj); // { a: 1, c: 3 }
+```
+
+### Implications
+- **Performance**: Similar to destructuring, it creates a new object.
+- **Behavior**: The original object remains unchanged.
+
+## Method 4: Using `Object.keys` and `reduce`
+
+Using `Object.keys` and `reduce` to create a new object without the specified property.
+
+### Example
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+let newObj = Object.keys(obj).reduce((acc, key) => {
+  if (key !== 'b') acc[key] = obj[key];
+  return acc;
+}, {});
+console.log(newObj); // { a: 1, c: 3 }
+```
+
+### Implications
+- **Performance**: This method involves iterating over all keys, which can be slower for large objects.
+- **Behavior**: The original object remains unchanged.
+
+## Method 5: Using `Object.assign`
+
+Using `Object.assign` to copy properties to a new object excluding the specified property.
+
+### Example
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+let newObj = Object.assign({}, obj);
+delete newObj.b;
+console.log(newObj); // { a: 1, c: 3 }
+```
+
+### Implications
+- **Performance**: It creates a new object and can be faster compared to `reduce`.
+- **Behavior**: The original object remains unchanged.
+
+## Conclusion
+
+- **`delete` Operator**: Modifies the original object and can be slow.
+- **Destructuring**: Creates a new object and promotes immutability.
+- **Spread Operator**: Similar to destructuring but can be syntactically simpler.
+- **`Object.keys` and `reduce`**: Provides fine-grained control but can be slower.
+- **`Object.assign`**: Creates a new object and can be faster than `reduce`.
+
+Choose the method that best fits your performance and immutability requirements.
